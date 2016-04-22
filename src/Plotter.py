@@ -6,6 +6,13 @@ Created on 6 de abr de 2016
 import math
 import matplotlib.pyplot as plt
 
+
+
+'''
+OBS: ESSA CLASSE AINDA NAO ESTA SENDO USADA EM LUGAR ALGUM!!!
+EXISTE UM METODO (OU SEJA, UM DEF) NO ARQUIVO JANELApRINCIPAL.PY
+QUE ESTOU USANDO PARA PLOTAR O GRAFICO. 
+'''
 class Plotter(object):
 
     def __init__(self, expoentes = [], coeficientes = []):
@@ -16,11 +23,6 @@ class Plotter(object):
         self.coeficientes = coeficientes
         self.funcao = 0
         
-        
-                
-        
-        
-    
     def escreveFuncao(self):
         plt.plot([0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9], [1,4,9,16,25,36,49,64,81])
         plt.show()
