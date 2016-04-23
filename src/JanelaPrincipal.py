@@ -415,8 +415,6 @@ class JanelaPrincipal(object):
         self.ok.clicked.connect(lambda: self.aplicaMetodo()) #Quando o botao OK recebe um clique
                                                              #o metodo encolhaDeMetodo eh chamado
         
-        #self.campoFuncao.textChanged.connect(lambda: self.escreveFuncao(self.campoFuncao.text()[len(self.campoFuncao.text()) - 1]))
-                                                             
         '''
         Codigo dos botoes
         '''    
@@ -460,6 +458,9 @@ class JanelaPrincipal(object):
         
     #######################   METODOS INTERNOS NO PROGRAMA   #######################################  
     
+    '''
+    Exibeno campo de texto a string texto passada como parametro.
+    '''
     def escreveFuncao(self, texto):
         print("I texto ->  " + texto)
         
@@ -475,6 +476,13 @@ class JanelaPrincipal(object):
 
         print("Esc fun => " + self.funcao)
         
+    '''
+    Substitui todos os simbolos matematicos da string self.funcao, que 
+    guarda a funcao matematica e que está exatamente como o usuario vê
+    no campo de texto, numa string igual a um código python.
+    Ex: Se  self.funcao = π  esse metodo a transforma em math.pi.
+    Dessa forma é possivel transforma-la em codigo python. 
+    '''    
     def organizaFuncao(self):
         listaSimbolos = []
         self.funcao = self.campoFuncao.text()
@@ -491,13 +499,22 @@ class JanelaPrincipal(object):
                         self.funcao = self.funcao.replace(simb, chave2)
         
         print("Org fun => " + self.funcao)
-        
+    
+    '''
+    Transforma uma linha de codigo python que está no
+    formato de string em codigo python mesmo.
+    '''
+    def transformaEmCodigoPy(self, texto):
+        expressao = parser.expr(texto) 
+        codigoExpresao = expressao.compile()
+        return codigoExpresao    
+         
+    '''
+    Plota o grafico da funcao que o usuario digitou no campo de texto.
+    '''    
     def plotarGrafico(self):
         self.organizaFuncao()
-        
-        e = parser.expr(self.funcao) #Essas duas linhas de codigo
-        codigoExpresao = e.compile() #pegam a funcao (que eh uma String) 
-                                     #e transformam em codigo python 
+        codigoPyFuncao = self.transformaEmCodigoPy(self.funcao) 
                                      
         if self.campoLimiteEsquerda.toPlainText() != "":                        #Esses IFs aplica o intervalo que o usuario
             self.limiteXEsquerda = float(self.campoLimiteEsquerda.toPlainText())#informou na interface grafica
@@ -511,7 +528,7 @@ class JanelaPrincipal(object):
         
         while X > self.limiteXEsquerda and X < self.limiteXDireita:
             xs.append(X)
-            ys.append(eval(codigoExpresao)) #Esse eval() avalia (calcula) valor de f(X) 
+            ys.append(eval(codigoPyFuncao)) #Esse eval() avalia (calcula) valor de f(X) 
             
             X += precisao
             
