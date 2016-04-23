@@ -28,10 +28,22 @@ except AttributeError:
 
 class JanelaPrincipal(object):
     ######################    DEFINICAO DE VARIAVEIS    #######################################
-    funcao = 0
-    dicionarioBotoesEspeciais = {"math.e":"e", "math.asin(":"arcsen(", "math.acos(":"arccos(", "math.atan(":"arctan(",\
-                            "math.sin(":"sen(", "math.cos(":"cos(", "math.tan(":"tan(", "math.pi":"π", "math.log10(":"log(",\
-                            "math.log(":"ln(", "**":"^", "math.sqrt(":"√(", "*":"×"}
+    funcao = ""
+    limiteXEsquerda = 0.001
+    limiteXDireita = 150
+    dicionarioBotoesEspeciais = {"math.e" : "E", \
+                                 "math.asin(" : "arcsen(", \
+                                 "math.acos(" : "arccos(", \
+                                 "math.atan(" : "arctan(", \
+                                 "math.sin(" : "sen(", \
+                                 "math.cos(" : "cos(", \
+                                 "math.tan(" : "tan(", \
+                                 "math.pi" : "π", \
+                                 "math.log10(" : "Log(", \
+                                 "math.log(" : "Ln(", \
+                                 "**" : "^", \
+                                 "math.sqrt(" : "√(", \
+                                 "*" : "×"}
                             
     ###########################################################################################    
     
@@ -43,6 +55,7 @@ class JanelaPrincipal(object):
         MainWindow.setMaximumSize(QtCore.QSize(450, 650))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
+        
         self.titulo = QtGui.QLabel(self.centralwidget)
         self.titulo.setGeometry(QtCore.QRect(0, 20, 451, 51))
         font = QtGui.QFont()
@@ -52,6 +65,7 @@ class JanelaPrincipal(object):
         self.titulo.setFont(font)
         self.titulo.setAlignment(QtCore.Qt.AlignCenter)
         self.titulo.setObjectName(_fromUtf8("titulo"))
+        
         self.rotuloIntervalo = QtGui.QLabel(self.centralwidget)
         self.rotuloIntervalo.setGeometry(QtCore.QRect(40, 530, 141, 20))
         font = QtGui.QFont()
@@ -60,6 +74,7 @@ class JanelaPrincipal(object):
         font.setWeight(75)
         self.rotuloIntervalo.setFont(font)
         self.rotuloIntervalo.setObjectName(_fromUtf8("rotuloIntervalo"))
+        
         self.rotuloX = QtGui.QLabel(self.centralwidget)
         self.rotuloX.setGeometry(QtCore.QRect(245, 530, 91, 20))
         font = QtGui.QFont()
@@ -70,12 +85,15 @@ class JanelaPrincipal(object):
         self.rotuloX.setFont(font)
         self.rotuloX.setAlignment(QtCore.Qt.AlignCenter)
         self.rotuloX.setObjectName(_fromUtf8("rotuloX"))
-        self.limiteEsquerda = QtGui.QPlainTextEdit(self.centralwidget)
-        self.limiteEsquerda.setGeometry(QtCore.QRect(170, 525, 71, 31))
-        self.limiteEsquerda.setObjectName(_fromUtf8("limiteEsquerda"))
-        self.limiteDireita = QtGui.QPlainTextEdit(self.centralwidget)
-        self.limiteDireita.setGeometry(QtCore.QRect(340, 525, 71, 31))
-        self.limiteDireita.setObjectName(_fromUtf8("limiteDireita"))
+        
+        self.campoLimiteEsquerda = QtGui.QPlainTextEdit(self.centralwidget)
+        self.campoLimiteEsquerda.setGeometry(QtCore.QRect(170, 525, 71, 31))
+        self.campoLimiteEsquerda.setObjectName(_fromUtf8("campoLimiteEsquerda"))
+        
+        self.campoLimiteDireita = QtGui.QPlainTextEdit(self.centralwidget)
+        self.campoLimiteDireita.setGeometry(QtCore.QRect(340, 525, 71, 31))
+        self.campoLimiteDireita.setObjectName(_fromUtf8("campoLimiteDireita"))
+        
         self.rotuloDigiteFuncao = QtGui.QLabel(self.centralwidget)
         self.rotuloDigiteFuncao.setGeometry(QtCore.QRect(0, 80, 451, 20))
         font = QtGui.QFont()
@@ -85,6 +103,7 @@ class JanelaPrincipal(object):
         self.rotuloDigiteFuncao.setFont(font)
         self.rotuloDigiteFuncao.setAlignment(QtCore.Qt.AlignCenter)
         self.rotuloDigiteFuncao.setObjectName(_fromUtf8("rotuloDigiteFuncao"))
+        
         self.rotuloOpcoes = QtGui.QLabel(self.centralwidget)
         self.rotuloOpcoes.setGeometry(QtCore.QRect(40, 473, 121, 20))
         font = QtGui.QFont()
@@ -93,6 +112,7 @@ class JanelaPrincipal(object):
         font.setWeight(75)
         self.rotuloOpcoes.setFont(font)
         self.rotuloOpcoes.setObjectName(_fromUtf8("rotuloOpcoes"))
+        
         self.opcoes = QtGui.QComboBox(self.centralwidget)
         self.opcoes.setGeometry(QtCore.QRect(170, 475, 111, 22))
         font = QtGui.QFont()
@@ -105,12 +125,14 @@ class JanelaPrincipal(object):
         self.opcoes.addItem(_fromUtf8(""))
         self.opcoes.addItem(_fromUtf8(""))
         self.opcoes.addItem(_fromUtf8(""))
+        
         self.ok = QtGui.QPushButton(self.centralwidget)
         self.ok.setGeometry(QtCore.QRect(190, 600, 80, 26))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.ok.setFont(font)
         self.ok.setObjectName(_fromUtf8("ok"))
+        
         self.sinalPotenciacao = QtGui.QPushButton(self.centralwidget)
         self.sinalPotenciacao.setGeometry(QtCore.QRect(280, 170, 40, 40))
         font = QtGui.QFont()
@@ -118,6 +140,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sinalPotenciacao.setFont(font)
         self.sinalPotenciacao.setObjectName(_fromUtf8("sinalPotenciacao"))
+        
         self.tangente = QtGui.QPushButton(self.centralwidget)
         self.tangente.setGeometry(QtCore.QRect(330, 320, 40, 40))
         font = QtGui.QFont()
@@ -125,6 +148,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.tangente.setFont(font)
         self.tangente.setObjectName(_fromUtf8("tangente"))
+        
         self.tres = QtGui.QPushButton(self.centralwidget)
         self.tres.setGeometry(QtCore.QRect(180, 320, 40, 40))
         font = QtGui.QFont()
@@ -132,6 +156,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.tres.setFont(font)
         self.tres.setObjectName(_fromUtf8("tres"))
+        
         self.oito = QtGui.QPushButton(self.centralwidget)
         self.oito.setGeometry(QtCore.QRect(130, 220, 40, 40))
         font = QtGui.QFont()
@@ -139,6 +164,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.oito.setFont(font)
         self.oito.setObjectName(_fromUtf8("oito"))
+        
         self.seno = QtGui.QPushButton(self.centralwidget)
         self.seno.setGeometry(QtCore.QRect(230, 320, 40, 40))
         font = QtGui.QFont()
@@ -146,6 +172,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.seno.setFont(font)
         self.seno.setObjectName(_fromUtf8("seno"))
+        
         self.sinalSoma = QtGui.QPushButton(self.centralwidget)
         self.sinalSoma.setGeometry(QtCore.QRect(80, 170, 40, 40))
         font = QtGui.QFont()
@@ -153,6 +180,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sinalSoma.setFont(font)
         self.sinalSoma.setObjectName(_fromUtf8("sinalSoma"))
+        
         self.sinalDivisao = QtGui.QPushButton(self.centralwidget)
         self.sinalDivisao.setGeometry(QtCore.QRect(230, 170, 40, 40))
         font = QtGui.QFont()
@@ -160,6 +188,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sinalDivisao.setFont(font)
         self.sinalDivisao.setObjectName(_fromUtf8("sinalDivisao"))
+        
         self.sinalSubtracao = QtGui.QPushButton(self.centralwidget)
         self.sinalSubtracao.setGeometry(QtCore.QRect(130, 170, 40, 40))
         font = QtGui.QFont()
@@ -167,6 +196,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sinalSubtracao.setFont(font)
         self.sinalSubtracao.setObjectName(_fromUtf8("sinalSubtracao"))
+        
         self.ponto = QtGui.QPushButton(self.centralwidget)
         self.ponto.setGeometry(QtCore.QRect(130, 370, 40, 40))
         font = QtGui.QFont()
@@ -176,6 +206,7 @@ class JanelaPrincipal(object):
         font.setWeight(75)
         self.ponto.setFont(font)
         self.ponto.setObjectName(_fromUtf8("ponto"))
+        
         self.um = QtGui.QPushButton(self.centralwidget)
         self.um.setGeometry(QtCore.QRect(80, 320, 40, 40))
         font = QtGui.QFont()
@@ -183,6 +214,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.um.setFont(font)
         self.um.setObjectName(_fromUtf8("um"))
+        
         self.arcoTangente = QtGui.QPushButton(self.centralwidget)
         self.arcoTangente.setGeometry(QtCore.QRect(330, 370, 40, 40))
         font = QtGui.QFont()
@@ -190,6 +222,7 @@ class JanelaPrincipal(object):
         font.setPointSize(8)
         self.arcoTangente.setFont(font)
         self.arcoTangente.setObjectName(_fromUtf8("arcoTangente"))
+        
         self.logNatural = QtGui.QPushButton(self.centralwidget)
         self.logNatural.setGeometry(QtCore.QRect(330, 220, 40, 40))
         font = QtGui.QFont()
@@ -197,6 +230,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.logNatural.setFont(font)
         self.logNatural.setObjectName(_fromUtf8("logNatural"))
+        
         self.nove = QtGui.QPushButton(self.centralwidget)
         self.nove.setGeometry(QtCore.QRect(180, 220, 40, 40))
         font = QtGui.QFont()
@@ -204,6 +238,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.nove.setFont(font)
         self.nove.setObjectName(_fromUtf8("nove"))
+        
         self.zero = QtGui.QPushButton(self.centralwidget)
         self.zero.setGeometry(QtCore.QRect(80, 370, 40, 40))
         font = QtGui.QFont()
@@ -211,6 +246,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.zero.setFont(font)
         self.zero.setObjectName(_fromUtf8("zero"))
+        
         self.arcoSeno = QtGui.QPushButton(self.centralwidget)
         self.arcoSeno.setGeometry(QtCore.QRect(230, 370, 40, 40))
         font = QtGui.QFont()
@@ -218,6 +254,7 @@ class JanelaPrincipal(object):
         font.setPointSize(8)
         self.arcoSeno.setFont(font)
         self.arcoSeno.setObjectName(_fromUtf8("arcoSeno"))
+        
         self.logBaseDez = QtGui.QPushButton(self.centralwidget)
         self.logBaseDez.setGeometry(QtCore.QRect(280, 220, 40, 40))
         font = QtGui.QFont()
@@ -225,6 +262,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.logBaseDez.setFont(font)
         self.logBaseDez.setObjectName(_fromUtf8("logBaseDez"))
+        
         self.dois = QtGui.QPushButton(self.centralwidget)
         self.dois.setGeometry(QtCore.QRect(130, 320, 40, 40))
         font = QtGui.QFont()
@@ -232,6 +270,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.dois.setFont(font)
         self.dois.setObjectName(_fromUtf8("dois"))
+        
         self.cosseno = QtGui.QPushButton(self.centralwidget)
         self.cosseno.setGeometry(QtCore.QRect(280, 320, 40, 40))
         font = QtGui.QFont()
@@ -239,6 +278,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.cosseno.setFont(font)
         self.cosseno.setObjectName(_fromUtf8("cosseno"))
+        
         self.botaoDelete = QtGui.QPushButton(self.centralwidget)
         self.botaoDelete.setGeometry(QtCore.QRect(230, 220, 40, 40))
         font = QtGui.QFont()
@@ -248,6 +288,7 @@ class JanelaPrincipal(object):
         font.setWeight(75)
         self.botaoDelete.setFont(font)
         self.botaoDelete.setObjectName(_fromUtf8("botaoDelete"))
+        
         self.quatro = QtGui.QPushButton(self.centralwidget)
         self.quatro.setGeometry(QtCore.QRect(80, 270, 40, 40))
         font = QtGui.QFont()
@@ -255,6 +296,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.quatro.setFont(font)
         self.quatro.setObjectName(_fromUtf8("quatro"))
+        
         self.sinalMultiplicacao = QtGui.QPushButton(self.centralwidget)
         self.sinalMultiplicacao.setGeometry(QtCore.QRect(180, 170, 40, 40))
         font = QtGui.QFont()
@@ -262,6 +304,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sinalMultiplicacao.setFont(font)
         self.sinalMultiplicacao.setObjectName(_fromUtf8("sinalMultiplicacao"))
+        
         self.sete = QtGui.QPushButton(self.centralwidget)
         self.sete.setGeometry(QtCore.QRect(80, 220, 40, 40))
         font = QtGui.QFont()
@@ -269,6 +312,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sete.setFont(font)
         self.sete.setObjectName(_fromUtf8("sete"))
+        
         self.parentesisAberto = QtGui.QPushButton(self.centralwidget)
         self.parentesisAberto.setGeometry(QtCore.QRect(230, 270, 40, 40))
         font = QtGui.QFont()
@@ -276,6 +320,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.parentesisAberto.setFont(font)
         self.parentesisAberto.setObjectName(_fromUtf8("parentesisAberto"))
+        
         self.seis = QtGui.QPushButton(self.centralwidget)
         self.seis.setGeometry(QtCore.QRect(180, 270, 40, 40))
         font = QtGui.QFont()
@@ -283,6 +328,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.seis.setFont(font)
         self.seis.setObjectName(_fromUtf8("seis"))
+        
         self.sinalRaizQuadrada = QtGui.QPushButton(self.centralwidget)
         self.sinalRaizQuadrada.setGeometry(QtCore.QRect(330, 170, 40, 40))
         font = QtGui.QFont()
@@ -290,6 +336,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.sinalRaizQuadrada.setFont(font)
         self.sinalRaizQuadrada.setObjectName(_fromUtf8("sinalRaizQuadrada"))
+        
         self.cinco = QtGui.QPushButton(self.centralwidget)
         self.cinco.setGeometry(QtCore.QRect(130, 270, 40, 40))
         font = QtGui.QFont()
@@ -297,6 +344,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.cinco.setFont(font)
         self.cinco.setObjectName(_fromUtf8("cinco"))
+        
         self.parentesisFechado = QtGui.QPushButton(self.centralwidget)
         self.parentesisFechado.setGeometry(QtCore.QRect(280, 270, 40, 40))
         font = QtGui.QFont()
@@ -304,6 +352,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.parentesisFechado.setFont(font)
         self.parentesisFechado.setObjectName(_fromUtf8("parentesisFechado"))
+        
         self.arcoCosseno = QtGui.QPushButton(self.centralwidget)
         self.arcoCosseno.setGeometry(QtCore.QRect(280, 370, 40, 40))
         font = QtGui.QFont()
@@ -311,12 +360,15 @@ class JanelaPrincipal(object):
         font.setPointSize(8)
         self.arcoCosseno.setFont(font)
         self.arcoCosseno.setObjectName(_fromUtf8("arcoCosseno"))
+        
         self.campoFuncao = QtGui.QLineEdit(self.centralwidget)
         self.campoFuncao.setGeometry(QtCore.QRect(25, 110, 400, 40))
         font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Cambria Math"))
         font.setPointSize(13)
         self.campoFuncao.setFont(font)
         self.campoFuncao.setObjectName(_fromUtf8("campoFuncao"))
+        
         self.numeroEuler = QtGui.QPushButton(self.centralwidget)
         self.numeroEuler.setGeometry(QtCore.QRect(180, 370, 40, 40))
         font = QtGui.QFont()
@@ -324,6 +376,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.numeroEuler.setFont(font)
         self.numeroEuler.setObjectName(_fromUtf8("numeroEuler"))
+        
         self.numPi = QtGui.QPushButton(self.centralwidget)
         self.numPi.setGeometry(QtCore.QRect(330, 270, 40, 40))
         font = QtGui.QFont()
@@ -331,6 +384,7 @@ class JanelaPrincipal(object):
         font.setPointSize(10)
         self.numPi.setFont(font)
         self.numPi.setObjectName(_fromUtf8("numPi"))
+        
         self.variavelX = QtGui.QPushButton(self.centralwidget)
         self.variavelX.setGeometry(QtCore.QRect(205, 420, 40, 40))
         font = QtGui.QFont()
@@ -342,6 +396,7 @@ class JanelaPrincipal(object):
         self.variavelX.setFont(font)
         self.variavelX.setWhatsThis(_fromUtf8(""))
         self.variavelX.setObjectName(_fromUtf8("variavelX"))
+        
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtGui.QStatusBar(MainWindow)
         self.statusbar.setObjectName(_fromUtf8("statusbar"))
@@ -351,13 +406,19 @@ class JanelaPrincipal(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
         ##################   CONECTANDO EVENTOS OCORRIDOS NA INTERFACE GRÁFICA   ##################
-        ####################   COM OS METODOS A SEREM EXECUTADOS NO CODIGO   ######################       
-        self.campoFuncao.textChanged.connect(lambda: self.capturarFuncao())
-        self.ok.clicked.connect(lambda: self.aplicaMetodo()) #Quando o botao OK eh recebe um clique
-                                                                #o metodo encolhaDeMetodo eh chamado
-                                                                
+        ####################   COM OS METODOS A SEREM EXECUTADOS NO CODIGO   ######################
+               
+        self.campoFuncao.textChanged.connect(lambda: self.organizaFuncao()) #Pega o texto que o usuario
+                                                                            #digita direto no campo de texto
+                                                                            #com o teclado do pc 
+        
+        self.ok.clicked.connect(lambda: self.aplicaMetodo()) #Quando o botao OK recebe um clique
+                                                             #o metodo encolhaDeMetodo eh chamado
+        
+        #self.campoFuncao.textChanged.connect(lambda: self.escreveFuncao(self.campoFuncao.text()[len(self.campoFuncao.text()) - 1]))
+                                                             
         '''
-        codigo dos botoes
+        Codigo dos botoes
         '''    
         self.zero.clicked.connect(lambda: self.escreveFuncao("0"))   
         self.um.clicked.connect(lambda: self.escreveFuncao("1")) 
@@ -400,50 +461,65 @@ class JanelaPrincipal(object):
     #######################   METODOS INTERNOS NO PROGRAMA   #######################################  
     
     def escreveFuncao(self, texto):
-        print(texto)
-        print(self.funcao)
+        print("I texto ->  " + texto)
+        
         if texto == "DEL":
             self.campoFuncao.backspace()
-            self.funcao = self.campoFuncao.text()
         elif texto in self.dicionarioBotoesEspeciais:
             simbolo = self.dicionarioBotoesEspeciais[texto]
             self.campoFuncao.insert(simbolo)
-            self.funcao + texto
+        elif texto == "x" or texto == "X":
+            self.campoFuncao.insert("X")
         else: 
             self.campoFuncao.insert(texto)
-            self.funcao + texto
-        print(texto)
-        print(self.funcao)
-    
-    def capturarFuncao(self):
-        self.funcao = self.campoFuncao.text()    
-    
-    '''    
-    def carregarFuncao(self, expressao):
-        e = parser.expr(expressao)
-        codigoExpresao = e.compile()
-        return codigoExpresao
-    '''
-    def plotarGrafico(self):
+
+        print("Esc fun => " + self.funcao)
         
-        e = parser.expr(self.funcao)
-        codigoExpresao = e.compile()
+    def organizaFuncao(self):
+        listaSimbolos = []
+        self.funcao = self.campoFuncao.text()
         
-        x = 0.001
-        xs = []
-        ys = []
-        while x < 150:
-            xs.append(x)
-            ys.append(eval(codigoExpresao))
+        
+        for chave in self.dicionarioBotoesEspeciais:
+            simbolo = self.dicionarioBotoesEspeciais[chave]
+            listaSimbolos.append(simbolo)
             
-            x += 0.001
+        for simb in listaSimbolos:
+            if simb in self.funcao:
+                for chave2 in self.dicionarioBotoesEspeciais:
+                    if simb == self.dicionarioBotoesEspeciais[chave2]:
+                        self.funcao = self.funcao.replace(simb, chave2)
+        
+        print("Org fun => " + self.funcao)
+        
+    def plotarGrafico(self):
+        self.organizaFuncao()
+        
+        e = parser.expr(self.funcao) #Essas duas linhas de codigo
+        codigoExpresao = e.compile() #pegam a funcao (que eh uma String) 
+                                     #e transformam em codigo python 
+                                     
+        if self.campoLimiteEsquerda.toPlainText() != "":                        #Esses IFs aplica o intervalo que o usuario
+            self.limiteXEsquerda = float(self.campoLimiteEsquerda.toPlainText())#informou na interface grafica
+        if self.campoLimiteDireita.toPlainText() != "":
+            self.limiteXDireita = float(self.campoLimiteDireita.toPlainText())
+            
+        precisao = 0.001
+        X = self.limiteXEsquerda + precisao #Esse X eh a variavel da minha funcao matematica, que foi 
+        xs = []                             #digitada pelo usuario na interface e que eu transformei em
+        ys = []                             #codigo python (que esta armazeanado na variavel codigoExpressao)
+        
+        while X > self.limiteXEsquerda and X < self.limiteXDireita:
+            xs.append(X)
+            ys.append(eval(codigoExpresao)) #Esse eval() avalia (calcula) valor de f(X) 
+            
+            X += precisao
             
         grafico.plot(xs, ys)        
         grafico.show()
         
         
     def aplicaMetodo(self):
-        funcao = self.campoFuncao.text()
         metodo = self.opcoes.currentText()
         
         if metodo == "Euler":
