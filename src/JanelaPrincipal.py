@@ -67,7 +67,7 @@ class JanelaPrincipal(object):
         self.titulo.setObjectName(_fromUtf8("titulo"))
         
         self.rotuloIntervalo = QtGui.QLabel(self.centralwidget)
-        self.rotuloIntervalo.setGeometry(QtCore.QRect(40, 530, 141, 20))
+        self.rotuloIntervalo.setGeometry(QtCore.QRect(25, 530, 141, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -86,12 +86,20 @@ class JanelaPrincipal(object):
         self.rotuloX.setAlignment(QtCore.Qt.AlignCenter)
         self.rotuloX.setObjectName(_fromUtf8("rotuloX"))
         
-        self.campoLimiteEsquerda = QtGui.QPlainTextEdit(self.centralwidget)
+        self.campoLimiteEsquerda = QtGui.QLineEdit(self.centralwidget)#QPlainTextEdit(self.centralwidget)
         self.campoLimiteEsquerda.setGeometry(QtCore.QRect(170, 525, 71, 31))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Cambria Math"))
+        font.setPointSize(13)
+        self.campoLimiteEsquerda.setFont(font)
         self.campoLimiteEsquerda.setObjectName(_fromUtf8("campoLimiteEsquerda"))
         
-        self.campoLimiteDireita = QtGui.QPlainTextEdit(self.centralwidget)
+        self.campoLimiteDireita = QtGui.QLineEdit(self.centralwidget)#QPlainTextEdit(self.centralwidget)
         self.campoLimiteDireita.setGeometry(QtCore.QRect(340, 525, 71, 31))
+        font = QtGui.QFont()
+        font.setFamily(_fromUtf8("Cambria Math"))
+        font.setPointSize(13)
+        self.campoLimiteDireita.setFont(font)
         self.campoLimiteDireita.setObjectName(_fromUtf8("campoLimiteDireita"))
         
         self.rotuloDigiteFuncao = QtGui.QLabel(self.centralwidget)
@@ -105,7 +113,7 @@ class JanelaPrincipal(object):
         self.rotuloDigiteFuncao.setObjectName(_fromUtf8("rotuloDigiteFuncao"))
         
         self.rotuloOpcoes = QtGui.QLabel(self.centralwidget)
-        self.rotuloOpcoes.setGeometry(QtCore.QRect(40, 473, 121, 20))
+        self.rotuloOpcoes.setGeometry(QtCore.QRect(25, 473, 121, 20))
         font = QtGui.QFont()
         font.setPointSize(10)
         font.setBold(True)
@@ -456,7 +464,7 @@ class JanelaPrincipal(object):
         ############################################################################################
         
         
-    #######################   METODOS INTERNOS NO PROGRAMA   #######################################  
+    #######################   METODOS INTERNOS DO PROGRAMA   #######################################  
     
     '''
     Exibeno campo de texto a string texto passada como parametro.
@@ -516,10 +524,10 @@ class JanelaPrincipal(object):
         self.organizaFuncao()
         codigoPyFuncao = self.transformaEmCodigoPy(self.funcao) 
                                      
-        if self.campoLimiteEsquerda.toPlainText() != "":                        #Esses IFs aplica o intervalo que o usuario
-            self.limiteXEsquerda = float(self.campoLimiteEsquerda.toPlainText())#informou na interface grafica
-        if self.campoLimiteDireita.toPlainText() != "":
-            self.limiteXDireita = float(self.campoLimiteDireita.toPlainText())
+        if self.campoLimiteEsquerda.text() != "":                        #Esses IFs aplica o intervalo que o usuario
+            self.limiteXEsquerda = float(self.campoLimiteEsquerda.text())#informou na interface grafica
+        if self.campoLimiteDireita.text() != "":
+            self.limiteXDireita = float(self.campoLimiteDireita.text())
             
         precisao = 0.001
         X = self.limiteXEsquerda + precisao #Esse X eh a variavel da minha funcao matematica, que foi 
@@ -532,7 +540,13 @@ class JanelaPrincipal(object):
             
             X += precisao
             
-        grafico.plot(xs, ys)        
+        
+        grafico.plot(xs, ys)
+        grafico.grid()   
+        grafico.axhline(color = 'k')
+        grafico.axvline(color = 'k')
+        grafico.ylabel("Eixo Y")
+        grafico.xlabel("Eixo X")
         grafico.show()
         
         
